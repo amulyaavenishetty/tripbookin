@@ -1,0 +1,66 @@
+<table style="width: 100%; height: 15%;">
+  <tr>
+    <td style="width: 10%;"> <img src="/assets/images/booking.jpg" width="100px" height="100px"> </td>
+    <td style="width: 70%;background-color: rgb(233, 228, 244);"> <span style="font-size: 30px; color: rgb(6, 6, 72);margin-left: 20%; ">CAB BOOKING APPLICATION </span> </td>
+    <td style="width: 20%;background-color: rgb(233, 228, 244); ">
+      <div *ngIf="loginStatus == false">
+        <table style="width: 100%; height: 100%;">
+          <tr><input type="text" placeholder="username" #username/></tr>
+          <tr><input type="password" placeholder="password" #password/> </tr>
+          <tr>
+             <button (click)="verifyUser(username.value,password.value)"> Login</button> 
+            <button (click)="registerUser()"> Register </button>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf="loginStatus == true">
+          <table>
+            <tr>
+              <td> <img src="/assets/images/{{photo}}" width="65px" height="65px"> </td>
+              <td> 
+                   Welcome <b> {{loginUsername}} </b> as <i> {{userRole}} </i> 
+                   <br/>
+                   <a href="#"> profile </a>
+                   <a href="#" (click)="doLogout()" style="margin-left: 20px;"> logout </a> 
+              </td>
+            </tr>
+          </table>
+      </div>
+    </td>
+  </tr>
+</table>
+<!-- <hr class="line"/> -->
+<table style="width: 100%; height: 50%; " *ngIf="loginStatus == true">
+  <br>
+  <tr style="background-color:  #dcb4f1">
+    <td class="link"> <a  *ngIf="userRole == 'admin'"  routerLink="/addcab">Add Cab</a> </td>
+    <td class="link"> <a  *ngIf="userRole == 'admin'"  routerLink="/searchcab">Search Cab</a> </td>
+    <td class="link"> <a  *ngIf="userRole == 'admin'" routerLink="/updatecab">Update Cab</a> </td>
+    <td class="link"> <a  *ngIf="userRole == 'admin'" routerLink="/adddriver">Add Driver</a> </td>
+    <td class="link"> <a  *ngIf="userRole == 'admin'" routerLink="/Viewtripdetails">View Trip Details</a> </td>
+    <td class="link"> <a  *ngIf="userRole == 'admin'" routerLink="updatedriver">Update Driver</a> </td>
+    <!-- <td class="link"> <a   routerLink="/bookyourride">Book Your Cab</a> </td> -->
+    <!-- <td class="link"> <a  *ngIf="userRole == 'user'" routerLink="/admin"  *ngIf="(userRole == 'admin')"> Admin </a>   </td> -->
+  </tr>
+  <br>
+</table>
+
+
+<!-- <hr class="line" /> -->
+<table style="width: 100%; height: 50%; " *ngIf="loginStatus == true">
+  <tr style="background-color:  #d6b3ec">
+    <td class="link"> <a  *ngIf="userRole == 'User'" routerLink="/home">HOME</a> </td>
+    <!-- <td class="link"> <a   *ngIf="userRole == 'User'" routerLink="/cab">CAB</a> </td> -->
+    <td class="link"> <a *ngIf="userRole == 'User'"  routerLink="/Viewtripdetails">View Trip Details</a> </td>
+    <!-- <td class="link"> <a  *ngIf="userRole == 'User'" routerLink="viewCabDetails">View Cab Details</a> </td> -->
+    <td class="link"> <a  *ngIf="userRole == 'User'" routerLink="/bookyourride">Book Your Cab</a> </td>
+    <!-- <td class="link"> <a   routerLink="/admin"  *ngIf="(userRole == 'user')"> User </a>   </td> -->
+  </tr>
+</table>
+<!-- <hr class="line" *ngIf="loginStatus == true"/> -->
+<div *ngIf="loginStatus == false">
+  <!-- <img src="/assets/images/home.png"/> -->
+</div> 
+<div *ngIf="loginStatus == true">
+  <router-outlet></router-outlet>
+</div>
